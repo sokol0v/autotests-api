@@ -1,4 +1,6 @@
 from clients.courses.courses_client import get_courses_client, CreateCourseRequestDict
+from clients.exercises import exercises_client
+from clients.exercises.exercises_client import CreateExercisesRequestDict
 from clients.files.files_client import get_files_client, CreateFileRequestDict
 from clients.private_http_builder import AuthenticationUserDict
 from clients.users.public_users_client import get_public_users_client, CreateUserRequestDict
@@ -15,7 +17,6 @@ create_user_request = CreateUserRequestDict(
     middleName="string"
 )
 create_user_response = public_users_client.create_user(create_user_request)
-print("Create user data", create_user_response)
 
 # Инициализируем клиенты
 authentication_user = AuthenticationUserDict(
@@ -46,3 +47,15 @@ create_course_request = CreateCourseRequestDict(
 )
 create_course_response = courses_client.create_course(create_course_request)
 print('Create course data:', create_course_response)
+
+# Создаем задание
+create_exercise_request = CreateExercisesRequestDict(
+    title='Basic Exercise',
+    courseId=create_course_response['course']['id'],
+    maxScore=100,
+    minScore=10,
+    orderIndex=0,
+    description="Basic Exercise",
+    estimatedTime="2 weeks",
+)
+create_exercise_response = exercises_client.create_exercise(create_exercise_request)
