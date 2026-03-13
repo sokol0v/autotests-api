@@ -14,14 +14,17 @@ class GetCoursesQueryDict(TypedDict):
     userId: str
 
 class Course(TypedDict):
+    """
+    Описание структуры курса.
+    """
     id: str
     title: str
     maxScore: int
     minScore: int
     description: str
+    previewFile: File  # Вложенная структура файла
     estimatedTime: str
-    previewFile: File
-    createdByUser: User
+    createdByUser: User  # Вложенная структура пользователя
 
 class CreateCourseRequestDict(TypedDict):
     """
@@ -36,6 +39,9 @@ class CreateCourseRequestDict(TypedDict):
     createdByUserId: str
 
 class CreateCourseResponseDict(TypedDict):
+    """
+    Описание структуры ответа создания курса.
+    """
     course: Course
 
 class UpdateCourseRequestDict(TypedDict):
