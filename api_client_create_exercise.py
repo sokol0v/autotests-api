@@ -1,6 +1,5 @@
 from clients.courses.courses_client import get_courses_client, CreateCourseRequestDict
-from clients.exercises import exercises_client
-from clients.exercises.exercises_client import CreateExercisesRequestDict
+from clients.exercises.exercises_client import CreateExercisesRequestDict, get_exercise_client
 from clients.files.files_client import get_files_client, CreateFileRequestDict
 from clients.private_http_builder import AuthenticationUserDict
 from clients.users.public_users_client import get_public_users_client, CreateUserRequestDict
@@ -25,6 +24,7 @@ authentication_user = AuthenticationUserDict(
 )
 files_client = get_files_client(authentication_user)
 courses_client = get_courses_client(authentication_user)
+exercises_client = get_exercise_client(authentication_user)
 
 # Загружаем файл
 create_file_request = CreateFileRequestDict(
@@ -59,3 +59,4 @@ create_exercise_request = CreateExercisesRequestDict(
     estimatedTime="2 weeks",
 )
 create_exercise_response = exercises_client.create_exercise(create_exercise_request)
+print('Create exercise data:', create_exercise_response)
