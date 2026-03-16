@@ -3,12 +3,30 @@ from httpx import Response
 from clients.api_client import APIClient
 from clients.private_http_builder import AuthenticationUserDict, get_private_http_client
 
-
 class GetExercisesQueryDict(TypedDict):
     """
     Описание структуры запроса на получение списка упражнений.
     """
     courseId: str
+
+class Exercise(TypedDict):
+    """
+    Описание структуры запроса на получение одного упражнения.
+    """
+    id: str
+    title: str
+    courseId: str
+    maxScore: int
+    minScore: int
+    orderIndex: int
+    description: str
+    estimatedTime: str
+
+class CreateExerciseResponseDict(TypedDict):
+    """
+    Описание структуры ответа создания курса.
+    """
+    exercise: Exercise
 
 class CreateExercisesRequestDict(TypedDict):
     """
@@ -84,7 +102,7 @@ class ExercisesClient(APIClient):
         """
         return self.delete(f"/api/v1/exercises/{exercise_id}")
 
-    def create_exercise(self, request: CreateExercisesRequestDict) -> CreateExercisesRequestDict:
+    def create_exercise(self, request: CreateExercisesRequestDict) -> CreateExerciseResponseDict:
         response = self.create_exercises_api(request)
         return response.json()
 
