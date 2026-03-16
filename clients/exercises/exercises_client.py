@@ -24,9 +24,27 @@ class Exercise(TypedDict):
 
 class CreateExerciseResponseDict(TypedDict):
     """
-    Описание структуры ответа создания курса.
+    Описание структуры ответа создания упражнения.
     """
     exercise: Exercise
+
+class GetExerciseResponseDict(TypedDict):
+    """
+    Описание структуры ответа получения одного упражнения.
+    """
+    exercise: Exercise
+
+class UpdateExerciseResponseDict(TypedDict):
+    """
+    Описание структуры ответа обновления одного упражнения.
+    """
+    exercise: Exercise
+
+class GetExercisesResponseDict(TypedDict):
+    """
+    Описание структуры ответа получения всех упражнений курса.
+    """
+    exercise: list[Exercise]
 
 class CreateExercisesRequestDict(TypedDict):
     """
@@ -104,6 +122,18 @@ class ExercisesClient(APIClient):
 
     def create_exercise(self, request: CreateExercisesRequestDict) -> CreateExerciseResponseDict:
         response = self.create_exercises_api(request)
+        return response.json()
+
+    def get_exercise(self, exercise_id: str) -> GetExerciseResponseDict:
+        response = self.get_exercise_api(exercise_id)
+        return response.json()
+
+    def get_exercises(self, query: GetExercisesQueryDict) -> GetExercisesResponseDict:
+        response = self.get_exercises_api(query)
+        return response.json()
+
+    def update_exercise(self, exercise_id: str, request: UpdateExerciseRequestDict) -> UpdateExerciseResponseDict:
+        response = self.update_exercise_api(exercise_id, request)
         return response.json()
 
 def get_exercise_client(user: AuthenticationUserDict) -> ExercisesClient:
