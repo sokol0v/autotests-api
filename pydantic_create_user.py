@@ -14,7 +14,7 @@ class CreateUserRequestSchema(BaseModel):
     """
     Описание структуры запроса на создание пользователя.
     """
-    email: str
+    email: EmailStr
     password: str
     lastName: str
     firstName: str
