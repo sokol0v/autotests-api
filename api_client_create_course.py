@@ -44,7 +44,7 @@ create_course_request = CreateCourseRequestDict(
     description="Python API course",
     estimatedTime="2 weeks",
     previewFileId=create_file_response['file']['id'],
-    createdByUserId=create_user_response['user']['id']
+    createdByUserId=create_user_response.user.id
 )
 create_course_response = courses_client.create_course(create_course_request)
 print('Create course data:', create_course_response)

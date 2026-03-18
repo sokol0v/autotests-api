@@ -1,11 +1,12 @@
 import uuid
+from typing import Union
 from pydantic import BaseModel, Field, EmailStr, HttpUrl, ValidationError
 
 
 # Добавили модель FileSchema
 class FileSchema(BaseModel):
     id: str
-    url: HttpUrl  # Используем HttpUrl вместо str
+    url: Union[HttpUrl, str]  # Используем HttpUrl вместо str
     filename: str
     directory: str
 
