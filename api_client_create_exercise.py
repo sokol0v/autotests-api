@@ -1,6 +1,7 @@
 from clients.courses.courses_client import get_courses_client, CreateCourseRequestDict
 from clients.exercises.exercises_client import CreateExercisesRequestDict, get_exercise_client
-from clients.files.files_client import get_files_client, CreateFileRequestDict
+from clients.files.files_client import get_files_client
+from clients.files.files_schema import CreateFileRequestSchema
 from clients.private_http_builder import AuthenticationUserSchema
 from clients.users.public_users_client import get_public_users_client, CreateUserRequestSchema
 from tools.fakers import get_random_email
@@ -27,7 +28,7 @@ courses_client = get_courses_client(authentication_user)
 exercises_client = get_exercise_client(authentication_user)
 
 # Загружаем файл
-create_file_request = CreateFileRequestDict(
+create_file_request = CreateFileRequestSchema(
     filename="image.png",
     directory="courses",
     upload_file="./testdata/files/image.png"
@@ -42,7 +43,7 @@ create_course_request = CreateCourseRequestDict(
     minScore=10,
     description="Python API course",
     estimatedTime="2 weeks",
-    previewFileId=create_file_response['file']['id'],
+    previewFileId=create_file_response.file.id,
     createdByUserId=create_user_response.user.id
 
 )

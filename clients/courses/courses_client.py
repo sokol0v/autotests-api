@@ -2,7 +2,7 @@ from typing import TypedDict
 from httpx import Response
 
 from clients.api_client import APIClient
-from clients.files.files_client import File
+from clients.files.files_schema import FileSchema
 from clients.private_http_builder import AuthenticationUserSchema, get_private_http_client
 from pydantic_basics import UserSchema
 
@@ -22,7 +22,7 @@ class Course(TypedDict):
     maxScore: int
     minScore: int
     description: str
-    previewFile: File  # Вложенная структура файла
+    previewFile: FileSchema  # Вложенная структура файла
     estimatedTime: str
     createdByUser: UserSchema  # Вложенная структура пользователя
 
