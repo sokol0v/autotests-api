@@ -54,7 +54,7 @@ print('Create course data:', create_course_response)
 # Создаем задание
 create_exercise_request = CreateExercisesRequestSchema(
     title='Basic Exercise',
-    course_id=create_course_response['course']['id'],
+    course_id=create_course_response.course.id,
     max_score=100,
     min_score=10,
     order_index=0,
