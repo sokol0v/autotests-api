@@ -1,5 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field
 
+from tools.fakers import fake
+
 
 class UserSchema(BaseModel):
     """
@@ -16,10 +18,10 @@ class CreateUserRequestSchema(BaseModel):
     Описание структуры запроса на создание пользователя.
     """
     email: EmailStr
-    password: str
-    last_name: str = Field(alias="lastName")
-    first_name: str = Field(alias="firstName")
-    middle_name: str = Field(alias="middleName")
+    password: str = Field(default_factory=fake.password)
+    last_name: str = Field(alias="lastName", default_factory=fake.last_name)
+    first_name: str = Field(alias="firstName", default_factory=fake.first_name)
+    middle_name: str = Field(alias="middleName", default_factory=fake.middle_name)
 
 class CreateUserResponseSchema(BaseModel):
     """

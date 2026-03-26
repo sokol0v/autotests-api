@@ -6,7 +6,6 @@ from clients.files.files_client import get_files_client
 from clients.files.files_schema import CreateFileRequestSchema
 from clients.private_http_builder import AuthenticationUserSchema
 from clients.users.public_users_client import get_public_users_client, CreateUserRequestSchema
-from tools.fakers import fake
 
 public_users_client = get_public_users_client()
 
@@ -40,11 +39,6 @@ print('Create file data:', create_file_response)
 
 # Создаем курс
 create_course_request = CreateCourseRequestSchema(
-    title="Python",
-    max_score=100,
-    min_score=10,
-    description="Python API course",
-    estimated_time="2 weeks",
     preview_file_id=create_file_response.file.id,
     created_by_user_id=create_user_response.user.id
 )
@@ -52,14 +46,6 @@ create_course_response = courses_client.create_course(create_course_request)
 print('Create course data:', create_course_response)
 
 # Создаем задание
-create_exercise_request = CreateExercisesRequestSchema(
-    title='Basic Exercise',
-    course_id=create_course_response.course.id,
-    max_score=100,
-    min_score=10,
-    order_index=0,
-    description="Basic Exercise",
-    estimated_time="2 weeks",
-)
+create_exercise_request = CreateExercisesRequestSchema()
 create_exercise_response = exercises_client.create_exercise(create_exercise_request)
 print('Create exercise data:', create_exercise_response)
